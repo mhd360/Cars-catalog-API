@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CarsServices } from "../services/cars.services";
+import { prisma } from "../database/prisma";
 
 export class CarsControllers {
   async create(req: Request, res: Response) {
@@ -21,7 +22,7 @@ export class CarsControllers {
   async getOne(req: Request, res: Response) {
     const carsServices = new CarsServices();
 
-    const response = await carsServices.getOne(Number(req.params.id));
+    const response = await carsServices.getOne(req.params.id);
 
     return res.status(200).json(response);
   }
@@ -29,7 +30,7 @@ export class CarsControllers {
   async patch(req: Request, res: Response) {
     const carsServices = new CarsServices();
 
-    const response = await carsServices.patch(Number(req.params.id), req.body);
+    const response = await carsServices.patch(req.params.id, req.body);
 
     return res.status(200).json(response);
   }
@@ -37,7 +38,7 @@ export class CarsControllers {
   async delete(req: Request, res: Response) {
     const carsServices = new CarsServices();
 
-    await carsServices.delete(Number(req.params.id));
+    await carsServices.delete(req.params.id);
 
     return res.status(204).json();
   }

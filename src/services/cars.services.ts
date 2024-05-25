@@ -3,22 +3,22 @@ import { prisma } from "../database/prisma";
 
 export class CarsServices {
   async create(body: TCarCreate) {
-    return await prisma.cars.create({ data: body });
+    return await prisma.car.create({ data: body });
   }
 
   async getMany() {
-    return await prisma.cars.findMany();
+    return await prisma.car.findMany();
   }
 
-  async getOne(id: number) {
-    return await prisma.cars.findFirst({ where: { id } });
+  async getOne(id: string) {
+    return await prisma.car.findFirst({ where: { id } });
   }
 
-  async patch(id: number, body: TCarPatch) {
-    return await prisma.cars.update({ where: { id }, data: body });
+  async patch(id: string, body: TCarPatch) {
+    return await prisma.car.update({ where: { id }, data: body });
   }
 
-  async delete(id: number) {
-    await prisma.cars.delete({ where: { id } });
+  async delete(id: string) {
+    await prisma.car.delete({ where: { id } });
   }
 }
